@@ -1,0 +1,14 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Maven Wrapper Shell Script for Arun's Developer Portfolio Backend
+# ----------------------------------------------------------------------------
+DIRNAME="$(cd "$(dirname "$0")" && pwd)"
+if [ -f "$DIRNAME/tools/apache-maven-3.9.6/bin/mvn" ]; then
+    chmod +x "$DIRNAME/tools/apache-maven-3.9.6/bin/mvn" 2>/dev/null || true
+    exec "$DIRNAME/tools/apache-maven-3.9.6/bin/mvn" "$@"
+elif command -v mvn >/dev/null 2>&1; then
+    exec mvn "$@"
+else
+    echo "Error: Maven not found."
+    exit 1
+fi

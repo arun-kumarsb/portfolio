@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Control Panel for Arun's Developer Portfolio">
+    <meta name="theme-color" content="#0a0d14">
+    <title>Admin Dashboard | Arun.dev</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* Admin-specific layout additions */
+        .admin-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-primary);
+        }
+
+        .admin-header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-user-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent-primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.82rem;
+            font-family: var(--font-mono);
+        }
+
+        /* Login Container */
+        .login-wrapper {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            margin-bottom: 1rem;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-wrapper {
+            flex-grow: 1;
+            padding: 2.5rem 0 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            transition: all var(--transition-fast);
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Admin Tabs */
+        .admin-nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-actions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Data Tables */
+        .table-responsive {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .admin-table th {
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .admin-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            vertical-align: middle;
+        }
+
+        .admin-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .admin-table tr:hover td {
+            background: var(--bg-card-hover);
+        }
+
+        .action-btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action-edit {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.35rem 0.65rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .btn-action-edit:hover {
+            background: var(--accent-secondary);
+            color: #ffffff;
+        }
+
+        .btn-action-delete {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 0.35rem 0.65rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .btn-action-delete:hover {
+            background: var(--error);
+            color: #ffffff;
+        }
+
+        /* Modal Backdrop & Dialog */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            z-index: 2000;
+        }
+
+        .modal-dialog {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 1rem;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .checkbox-group input {
+            accent-color: var(--accent-primary);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Toast notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 3000;
+        }
+
+        .toast-notification {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            color: var(--text-primary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideUp 0.3s ease;
+        }
+
+        .toast-notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast-notification.error {
+            border-left: 4px solid var(--error);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="admin-page">
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="container admin-header-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="index.html" class="brand-logo">
+                    <span class="logo-bracket">&lt;</span>Arun<span class="logo-accent">.dev</span><span class="logo-bracket">/&gt;</span>
+                </a>
+                <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">Admin Portal</span>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem;" id="header-actions">
+                <a href="index.html" class="btn btn-outline btn-sm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"></path></svg>
+                    <span>View Portfolio</span>
+                </a>
+                <div id="auth-controls" style="display: none;">
+                    <span class="admin-user-badge">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                        <span id="active-username">admin</span>
+                    </span>
+                    <button class="btn btn-secondary btn-sm" id="logout-btn">Sign Out</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. LOGIN SCREEN (Visible when unauthenticated) -->
+    <main class="login-wrapper" id="login-section">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="security-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span>Spring Security &bull; JWT Protected</span>
+                </div>
+                <h1>Admin Sign In</h1>
+                <p>Authenticate to manage projects, skills, education, and inquiries.</p>
+            </div>
+
+            <form id="login-form" class="contact-form">
+                <div class="form-banner" id="login-banner" style="display: none;"></div>
+
+                <div class="form-group">
+                    <label for="login-username" class="form-label">Admin Username</label>
+                    <input type="text" id="login-username" class="form-input" placeholder="admin" required autocomplete="username" value="admin">
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" required autocomplete="current-password" value="adminpassword123">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="login-submit-btn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="btn-spinner" style="display: none;"></div>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- 2. DASHBOARD (Visible when authenticated) -->
+    <main class="dashboard-wrapper" id="dashboard-section" style="display: none;">
+        <div class="container">
+            <!-- Metrics Row -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Projects</span>
+                    <span class="stat-value" id="stat-projects-count">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Skills</span>
+                    <span class="stat-value" id="stat-skills-count">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Education</span>
+                    <span class="stat-value" id="stat-education-count">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Inquiries Received</span>
+                    <span class="stat-value" id="stat-messages-count" style="color: var(--accent-primary);">-</span>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <nav class="admin-nav-tabs">
+                <button class="tab-btn active" data-tab="projects-tab">Projects Manager</button>
+                <button class="tab-btn" data-tab="skills-tab">Skills Manager</button>
+                <button class="tab-btn" data-tab="education-tab">Education Manager</button>
+                <button class="tab-btn" data-tab="messages-tab">Messages Inbox</button>
+            </nav>
+
+            <!-- TAB 1: PROJECTS -->
+            <section class="tab-content active" id="projects-tab">
+                <div class="tab-actions-header">
+                    <div>
+                        <h2>Portfolio Projects</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Manage project cards, live links, repositories, and featured status.</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="btn-add-project">+ Add New Project</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Technologies</th>
+                                <th>Featured</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projects-table-body">
+                            <!-- Populated dynamically via admin.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB 2: SKILLS -->
+            <section class="tab-content" id="skills-tab">
+                <div class="tab-actions-header">
+                    <div>
+                        <h2>Technical Skills</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Add, modify, or reorganize skill sets and proficiency levels.</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="btn-add-skill">+ Add New Skill</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Skill Name</th>
+                                <th>Category</th>
+                                <th>Proficiency</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="skills-table-body">
+                            <!-- Populated dynamically via admin.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB 3: EDUCATION -->
+            <section class="tab-content" id="education-tab">
+                <div class="tab-actions-header">
+                    <div>
+                        <h2>Education History</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Maintain academic background and engineering degree entries.</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="btn-add-education">+ Add Education Entry</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Degree &amp; Field</th>
+                                <th>Institution</th>
+                                <th>Timeframe</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="education-table-body">
+                            <!-- Populated dynamically via admin.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB 4: MESSAGES INBOX -->
+            <section class="tab-content" id="messages-tab">
+                <div class="tab-actions-header">
+                    <div>
+                        <h2>Contact Messages Inbox</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Review messages and recruiter inquiries submitted through the contact form.</p>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" id="btn-refresh-messages">&#8635; Refresh Inbox</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Sender Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Date Received</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="messages-table-body">
+                            <!-- Populated dynamically via admin.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- PROJECT MODAL -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="project-modal-title">Add Project</h3>
+                <button class="modal-close-btn" data-close="project-modal">&times;</button>
+            </div>
+            <form id="project-form" class="contact-form">
+                <input type="hidden" id="project-id">
+
+                <div class="form-group">
+                    <label class="form-label" for="proj-title">Project Title *</label>
+                    <input type="text" id="proj-title" class="form-input" required placeholder="e.g. SpendSense">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="proj-desc">Description *</label>
+                    <textarea id="proj-desc" class="form-textarea" rows="4" required placeholder="Detailed project overview..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="proj-tech">Technologies (Comma separated) *</label>
+                    <input type="text" id="proj-tech" class="form-input" required placeholder="e.g. Java, Spring Boot, MySQL">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="proj-github">GitHub Repository URL</label>
+                    <input type="url" id="proj-github" class="form-input" placeholder="https://github.com/TODO-arun/project">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="proj-live">Live Demo URL</label>
+                    <input type="url" id="proj-live" class="form-input" placeholder="https://project.example.com">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="proj-featured">
+                    <label for="proj-featured" class="form-label" style="cursor: pointer;">Mark as Featured Project</label>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+                    <button type="button" class="btn btn-secondary" data-close="project-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-project-btn">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SKILL MODAL -->
+    <div class="modal-overlay" id="skill-modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="skill-modal-title">Add Skill</h3>
+                <button class="modal-close-btn" data-close="skill-modal">&times;</button>
+            </div>
+            <form id="skill-form" class="contact-form">
+                <input type="hidden" id="skill-id">
+
+                <div class="form-group">
+                    <label class="form-label" for="skill-name">Skill Name *</label>
+                    <input type="text" id="skill-name" class="form-input" required placeholder="e.g. Spring Boot">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="skill-cat">Category *</label>
+                    <select id="skill-cat" class="form-input" required>
+                        <option value="Programming">Programming</option>
+                        <option value="Backend">Backend</option>
+                        <option value="Database">Database</option>
+                        <option value="Frontend">Frontend</option>
+                        <option value="Tools">Tools</option>
+                        <option value="AI/ML">AI/ML</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="skill-prof">Proficiency Level *</label>
+                    <select id="skill-prof" class="form-input" required>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Proficient">Proficient</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Beginner">Beginner</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+                    <button type="button" class="btn btn-secondary" data-close="skill-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-skill-btn">Save Skill</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- EDUCATION MODAL -->
+    <div class="modal-overlay" id="education-modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="education-modal-title">Add Education</h3>
+                <button class="modal-close-btn" data-close="education-modal">&times;</button>
+            </div>
+            <form id="education-form" class="contact-form">
+                <input type="hidden" id="education-id">
+
+                <div class="form-group">
+                    <label class="form-label" for="edu-degree">Degree / Certificate *</label>
+                    <input type="text" id="edu-degree" class="form-input" required placeholder="e.g. Bachelor of Engineering (B.E.)">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="edu-field">Field of Study</label>
+                    <input type="text" id="edu-field" class="form-input" placeholder="e.g. Computer Science & Engineering">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="edu-institution">Institution / University *</label>
+                    <input type="text" id="edu-institution" class="form-input" required placeholder="e.g. Engineering University">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="edu-start">Start Year / Date</label>
+                        <input type="text" id="edu-start" class="form-input" placeholder="2023">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="edu-end">End Year / Date</label>
+                        <input type="text" id="edu-end" class="form-input" placeholder="2027 (Expected)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="edu-desc">Course Highlights &amp; Description</label>
+                    <textarea id="edu-desc" class="form-textarea" rows="3" placeholder="Key coursework, achievements..."></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+                    <button type="button" class="btn btn-secondary" data-close="education-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-education-btn">Save Entry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Modular JavaScript Files -->
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
