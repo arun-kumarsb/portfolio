@@ -106,7 +106,7 @@ public class DataInitializer implements CommandLineRunner {
                     new Skill("Data Structures & Algorithms", "Core CS", "Proficient"),
                     new Skill("Object-Oriented Design", "Core CS", "Advanced"),
                     new Skill("Distributed Systems & Networks", "Core CS", "Intermediate"),
-                    new Skill("AI/ML & Security (Learning)", "Core CS", "Beginner")
+                    new Skill("System Architecture & Design", "Core CS", "Intermediate")
             );
             skillRepository.saveAll(skills);
         }

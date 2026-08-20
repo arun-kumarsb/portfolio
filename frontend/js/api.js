@@ -82,7 +82,7 @@ const MOCK_DATA = {
         { id: 18, name: "Data Structures & Algorithms", category: "Core CS", proficiency: "Proficient" },
         { id: 19, name: "Object-Oriented Design", category: "Core CS", proficiency: "Advanced" },
         { id: 20, name: "Distributed Systems & Networking", category: "Core CS", proficiency: "Intermediate" },
-        { id: 21, name: "AI/ML & Security (Learning)", category: "Core CS", proficiency: "Beginner" }
+        { id: 21, name: "System Architecture & Design", category: "Core CS", proficiency: "Intermediate" }
     ],
     education: [
         {
