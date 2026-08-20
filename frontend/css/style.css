@@ -44,7 +44,7 @@
     --font-sans: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
     
     /* Layout & Sizing */
-    --container-width: 1140px;
+    --container-width: 1240px;
     --header-height: 72px;
     --radius-sm: 6px;
     --radius-md: 10px;
@@ -365,21 +365,30 @@ button, input, textarea, select {
    Hero Section
    ========================================================================== */
 .hero-section {
-    padding-top: calc(var(--header-height) + 3.5rem);
-    padding-bottom: 5rem;
+    padding-top: calc(var(--header-height) + 3rem);
+    padding-bottom: 4.5rem;
     min-height: calc(100vh - var(--header-height));
     display: flex;
     align-items: center;
-    background: radial-gradient(circle at 80% 25%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
-                radial-gradient(circle at 15% 75%, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
+    justify-content: center;
+    background: radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 15% 70%, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
     position: relative;
 }
 
 .hero-container {
     display: grid;
-    grid-template-columns: 1.18fr 0.82fr;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: 3.5rem;
     align-items: center;
+    width: 100%;
+}
+
+.hero-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .hero-badges {
@@ -387,31 +396,32 @@ button, input, textarea, select {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.6rem;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.35rem;
 }
 
 .hero-title {
-    font-size: 3rem;
+    font-size: clamp(2.4rem, 3.8vw, 3.15rem);
     font-weight: 800;
-    line-height: 1.18;
+    line-height: 1.15;
     letter-spacing: -0.03em;
     margin-bottom: 0.85rem;
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
+    font-size: clamp(1.15rem, 1.8vw, 1.35rem);
     font-weight: 600;
     color: var(--text-secondary);
-    line-height: 1.45;
+    line-height: 1.4;
     margin-bottom: 1.25rem;
+    max-width: 540px;
 }
 
 .hero-description {
-    font-size: 0.96rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
-    line-height: 1.72;
+    line-height: 1.7;
     margin-bottom: 2rem;
-    max-width: 580px;
+    max-width: 520px;
 }
 
 .hero-cta-group {
@@ -457,23 +467,33 @@ button, input, textarea, select {
     transform: translateY(-1px);
 }
 
+.hero-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Terminal Card in Hero */
 .terminal-card {
     background: var(--bg-terminal);
-    border: 1px solid var(--border-subtle);
+    border: 1px solid rgba(56, 189, 248, 0.25);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
-    transition: border-color var(--transition-normal);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.08);
+    width: 100%;
+    transition: all var(--transition-normal);
 }
 
 .terminal-card:hover {
-    border-color: rgba(56, 189, 248, 0.35);
+    border-color: rgba(56, 189, 248, 0.45);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.15);
+    transform: translateY(-2px);
 }
 
 .terminal-header {
     background: #0f1420;
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1.15rem;
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--border-subtle);
@@ -502,7 +522,7 @@ button, input, textarea, select {
 }
 
 .terminal-body {
-    padding: 1.25rem;
+    padding: 1.35rem 1.4rem;
     font-family: var(--font-mono);
     font-size: 0.85rem;
     line-height: 1.6;
@@ -530,11 +550,14 @@ button, input, textarea, select {
 }
 
 .terminal-code {
-    background: #090d16;
-    padding: 0.85rem;
+    background: #060912;
+    border: 1px solid rgba(30, 41, 59, 0.8);
+    padding: 0.95rem 1.15rem;
     border-radius: var(--radius-sm);
     margin-bottom: 0.9rem;
     overflow-x: auto;
+    font-size: 0.84rem;
+    line-height: 1.55;
 }
 
 .json-key { color: #38bdf8; }

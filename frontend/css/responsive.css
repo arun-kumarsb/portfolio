@@ -21,18 +21,30 @@ html, body {
 /* ==========================================================================
    1. Tablets & Medium Screens (max-width: 992px)
    ========================================================================== */
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1024px) {
     .section {
         padding: 4.5rem 0;
     }
 
     .hero-container {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        gap: 2rem;
+        align-items: center;
     }
 
     .hero-title {
-        font-size: 2.75rem;
+        font-size: 2.6rem;
+    }
+
+    .hero-visual {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
 
     .hero-visual {
