@@ -81,10 +81,16 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/contact/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/contact/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/auth/me").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**")
+                        .permitAll()
 
                         // Any other request requires authentication
-                        .anyRequest().authenticated()
-                )
+                        .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -95,7 +101,8 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin"));
+        configuration.setAllowedHeaders(
+                Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin"));
         configuration.setExposedHeaders(Collections.singletonList("Authorization"));
         configuration.setAllowCredentials(false);
         configuration.setMaxAge(3600L);
