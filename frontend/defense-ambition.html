@@ -40,27 +40,6 @@
             margin-bottom: 1.25rem;
         }
 
-        .personal-statement-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-left: 4px solid var(--accent-primary);
-            border-radius: var(--radius-lg);
-            padding: 2.25rem;
-            margin: 2.25rem 0 0 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .personal-statement-card p {
-            font-size: 1.02rem;
-            color: var(--text-secondary);
-            line-height: 1.75;
-            margin-bottom: 1.15rem;
-        }
-
-        .personal-statement-card p:last-child {
-            margin-bottom: 0;
-        }
-
         /* Two Paths Grid */
         .paths-grid {
             display: grid;
@@ -370,17 +349,37 @@
                     Inspired by service. Driven by technology. Exploring where engineering and national service could take me.
                 </p>
 
-                <!-- Personal Statement -->
-                <div class="personal-statement-card">
-                    <p>
-                        My interest in defense is personal. My father's service gave me an early connection to the armed forces and shaped my respect for the idea of serving the country. As an engineering student, I have found my own path toward that interest through technology, software engineering, and systems thinking.
-                    </p>
-                    <p>
-                        One of my long-term goals is to explore becoming an Army Officer, including opportunities such as <strong>CDS or AFCAT</strong> if I meet the relevant eligibility requirements. I know that this is a competitive path, and I see it as an aspiration that I need to work toward rather than something I can assume will happen.
-                    </p>
-                    <p>
-                        At the same time, I want to develop into a strong software engineer with knowledge of backend systems, distributed architectures, AI/ML, cybersecurity, and communication systems. Whether my future contribution comes through military service, defense technology, or another engineering role, I want the skills I build to have a meaningful purpose.
-                    </p>
+                <!-- Personal Statement in Terminal Card -->
+                <div class="terminal-card" style="margin-top: 2.25rem; max-width: 900px; box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
+                        <span class="terminal-title">arun@defense-station:~/statement.md</span>
+                    </div>
+                    <div class="terminal-body" style="padding: 1.6rem 1.85rem; font-family: var(--font-sans); font-size: 0.98rem; line-height: 1.75;">
+                        <div class="terminal-line" style="font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                            <span class="t-prompt">$</span> <span class="t-command">cat personal_statement.md</span>
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1.15rem; color: var(--text-secondary);">
+                            <p style="margin: 0; font-size: 1.02rem; line-height: 1.75;">
+                                My interest in defense is personal. My father's service gave me an early connection to the armed forces and shaped my respect for the idea of serving the country. As an engineering student, I have found my own path toward that interest through technology, software engineering, and systems thinking.
+                            </p>
+                            <p style="margin: 0; font-size: 1.02rem; line-height: 1.75;">
+                                One of my long-term goals is to explore becoming an Army Officer, including opportunities such as <strong style="color: var(--text-primary); font-weight: 600;">CDS or AFCAT</strong> if I meet the relevant eligibility requirements. I know that this is a competitive path, and I see it as an aspiration that I need to work toward rather than something I can assume will happen.
+                            </p>
+                            <p style="margin: 0; font-size: 1.02rem; line-height: 1.75;">
+                                At the same time, I want to develop into a strong software engineer with knowledge of backend systems, distributed architectures, AI/ML, cybersecurity, and communication systems. Whether my future contribution comes through military service, defense technology, or another engineering role, I want the skills I build to have a meaningful purpose.
+                            </p>
+                        </div>
+
+                        <div class="terminal-line terminal-cursor-line" style="font-family: var(--font-mono); font-size: 0.85rem; margin-top: 1.25rem; margin-bottom: 0;">
+                            <span class="t-prompt">$</span> <span class="t-cursor">_</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
