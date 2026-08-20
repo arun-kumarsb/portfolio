@@ -69,6 +69,15 @@
 
 ---
 
+### Milestone 8: UI Harmonization & Hero Terminal Card Transformation
+- **Implementation**:
+  - Transformed the personal statement section on `defense-ambition.html` from a basic card into a developer terminal card (`terminal-card`) matching `index.html`.
+  - Added traffic light dots (`.dot-red`, `.dot-yellow`, `.dot-green`), terminal header (`arun@defense-station:~/statement.md`), prompt line (`$ cat personal_statement.md`), and pulsing terminal cursor.
+  - Equalized card heights across About and Contact sections on desktop.
+  - Added mobile navigation drawer to `defense-ambition.html`.
+
+---
+
 ## Commit History Record
 
 | Commit Hash | Message Summary | Key Changes |
@@ -78,3 +87,6 @@
 | `638a833` | Incorporate Army Brat SIKH LI heritage and DRDO/HAL/IISc defense engineering focus across portfolio | Family heritage & strategic research context |
 | `5c8fb9d` | Redesign Defense & Service ambition page and portfolio touchpoints with authentic, mature narrative | Complete narrative grounding, CDS/AFCAT pathways, STCS academic notice, removal of exaggerated claims & TODOs |
 | `01f319d` | Remove AI/ML and Cybersecurity from general portfolio while preserving academic exploration on Defense page | Strict separation between main portfolio and defense learning route |
+| `343b98d` | fix(ui): harmonize layout, card alignments, margins, and mobile nav; add system docs | Layout harmonization, equal-height cards, and docs creation |
+| `63928a4` | style: replace personal statement card with developer terminal card in defense ambition hero | Personal statement terminal card UI upgrade |
+
