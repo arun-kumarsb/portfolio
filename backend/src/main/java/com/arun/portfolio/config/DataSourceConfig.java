@@ -9,12 +9,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
  * Resilient DataSource Configuration.
  * Connects to MySQL when available and valid.
+ * Supports both standard JDBC URLs (jdbc:mysql://...) and raw service URIs (mysql://user:pass@host:port/db).
  * If MySQL credentials are not yet configured or access is denied,
  * gracefully falls back to persistent local storage so the application runs seamlessly.
  */
@@ -38,27 +40,51 @@ public class DataSourceConfig {
     @Bean
     @Primary
     public DataSource dataSource() {
-        boolean isExplicitH2 = configuredUrl != null && configuredUrl.startsWith("jdbc:h2");
+        String targetUrl = configuredUrl != null ? configuredUrl.trim() : "";
+        String targetUser = configuredUsername;
+        String targetPass = configuredPassword;
+
+        // Automatically convert raw cloud URIs (e.g. Aiven mysql://user:pass@host:port/db) to JDBC format
+        if (targetUrl.startsWith("mysql://")) {
+            try {
+                URI uri = new URI(targetUrl);
+                String userInfo = uri.getUserInfo();
+                if (userInfo != null && userInfo.contains(":")) {
+                    String[] parts = userInfo.split(":", 2);
+                    targetUser = parts[0];
+                    targetPass = parts[1];
+                }
+                String host = uri.getHost();
+                int port = uri.getPort() != -1 ? uri.getPort() : 3306;
+                String path = uri.getPath() != null && !uri.getPath().isEmpty() ? uri.getPath() : "/defaultdb";
+                targetUrl = "jdbc:mysql://" + host + ":" + port + path + "?sslmode=require&useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+                log.info("Transformed raw MySQL URI into valid JDBC URL: {}", targetUrl);
+            } catch (Exception ex) {
+                targetUrl = "jdbc:" + targetUrl;
+            }
+        }
+
+        boolean isExplicitH2 = targetUrl.startsWith("jdbc:h2");
 
         if (isExplicitH2) {
-            log.info("Using configured H2 database: {}", configuredUrl);
+            log.info("Using configured H2 database: {}", targetUrl);
             HikariDataSource ds = new HikariDataSource();
-            ds.setJdbcUrl(configuredUrl);
-            ds.setUsername(configuredUsername);
-            ds.setPassword(configuredPassword);
+            ds.setJdbcUrl(targetUrl);
+            ds.setUsername(targetUser);
+            ds.setPassword(targetPass);
             ds.setDriverClassName("org.h2.Driver");
             ds.setPoolName("TestH2Pool");
             return ds;
         }
 
-        log.info("Attempting connection to MySQL database at: {}", configuredUrl);
+        log.info("Attempting connection to MySQL database at: {}", targetUrl);
         boolean isMySqlAvailable = false;
 
         try {
             Class.forName(configuredDriver);
-            try (Connection conn = DriverManager.getConnection(configuredUrl, configuredUsername, configuredPassword)) {
+            try (Connection conn = DriverManager.getConnection(targetUrl, targetUser, targetPass)) {
                 isMySqlAvailable = true;
-                log.info("✓ Successfully connected to MySQL database: {}", configuredUrl);
+                log.info("✓ Successfully connected to MySQL database: {}", targetUrl);
             }
         } catch (Exception ex) {
             log.warn("! MySQL connection unavailable or access denied ({}).", ex.getMessage());
@@ -67,9 +93,9 @@ public class DataSourceConfig {
 
         if (isMySqlAvailable) {
             HikariDataSource ds = new HikariDataSource();
-            ds.setJdbcUrl(configuredUrl);
-            ds.setUsername(configuredUsername);
-            ds.setPassword(configuredPassword);
+            ds.setJdbcUrl(targetUrl);
+            ds.setUsername(targetUser);
+            ds.setPassword(targetPass);
             ds.setDriverClassName(configuredDriver);
             ds.setMaximumPoolSize(10);
             ds.setMinimumIdle(2);
