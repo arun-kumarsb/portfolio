@@ -557,9 +557,14 @@ button, input, textarea {
    ========================================================================== */
 .about-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.08fr 0.92fr;
     gap: 2.5rem;
-    align-items: start;
+    align-items: stretch;
+}
+
+.about-text-column {
+    display: flex;
+    flex-direction: column;
 }
 
 .about-card {
@@ -567,6 +572,11 @@ button, input, textarea {
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
     padding: 2.25rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .about-lead {
@@ -580,7 +590,7 @@ button, input, textarea {
     font-size: 0.98rem;
     color: var(--text-secondary);
     line-height: 1.75;
-    margin-bottom: 1rem;
+    margin-bottom: 1.15rem;
 }
 
 .about-body:last-child {
@@ -590,17 +600,20 @@ button, input, textarea {
 .about-features-column {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
+    justify-content: space-between;
 }
 
 .feature-card {
     display: flex;
-    gap: 1.25rem;
+    gap: 1.15rem;
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
-    padding: 1.4rem;
+    padding: 1.25rem 1.35rem;
     transition: all var(--transition-fast);
+    align-items: flex-start;
+    flex: 1;
 }
 
 .feature-card:hover {
@@ -610,8 +623,8 @@ button, input, textarea {
 }
 
 .feature-icon {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: var(--radius-md);
     background: rgba(56, 189, 248, 0.1);
     color: var(--accent-primary);
@@ -621,17 +634,22 @@ button, input, textarea {
     flex-shrink: 0;
 }
 
+.feature-info {
+    flex: 1;
+    min-width: 0;
+}
+
 .feature-info h3 {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     font-weight: 600;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.25rem;
     color: var(--text-primary);
 }
 
 .feature-info p {
     font-size: 0.88rem;
     color: var(--text-secondary);
-    line-height: 1.55;
+    line-height: 1.5;
 }
 
 /* ==========================================================================
@@ -934,7 +952,7 @@ button, input, textarea {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
     gap: 2.5rem;
-    align-items: start;
+    align-items: stretch;
 }
 
 .contact-info-card {
@@ -942,6 +960,11 @@ button, input, textarea {
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
     padding: 2.25rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .contact-info-card h3 {
@@ -955,7 +978,7 @@ button, input, textarea {
     font-size: 0.95rem;
     color: var(--text-secondary);
     line-height: 1.65;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
 }
 
 .contact-details {
@@ -986,6 +1009,7 @@ button, input, textarea {
 .contact-meta {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .meta-label {
@@ -1014,6 +1038,7 @@ button, input, textarea {
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
     font-size: 0.85rem;
+    margin-top: auto;
 }
 
 .status-dot {
@@ -1038,6 +1063,8 @@ button, input, textarea {
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
     padding: 2.25rem;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .contact-form {
