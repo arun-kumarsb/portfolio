@@ -6,7 +6,8 @@
 
 const API_CONFIG = {
     // Production Render Backend URL (replace with your Render URL when deployed, e.g. 'https://arun-portfolio-api.onrender.com/api')
-    PROD_BACKEND_URL: 'https://arun-portfolio-api.onrender.com/api',
+    PROD_BACKEND_URL: 'https://portfolio-lk3x.onrender.com/api',
+    
     
     // Automatically uses localhost in local development and Render URL in production on Vercel
     get BASE_URL() {
@@ -15,7 +16,7 @@ const API_CONFIG = {
         }
         return this.PROD_BACKEND_URL;
     },
-    TIMEOUT_MS: 8000,
+    TIMEOUT_MS: 30000,
     TOKEN_KEY: 'arun_portfolio_jwt_token',
     USER_KEY: 'arun_portfolio_admin_user'
 };

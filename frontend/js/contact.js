@@ -170,17 +170,20 @@
         try {
             const health = await window.api.checkBackendHealth();
             if (health.online) {
-                backendStatusIndicator.textContent = 'REST API Connected (Port 8080)';
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                backendStatusIndicator.textContent = isLocal ? 'REST API Connected (Port 8080)' : 'REST API Connected (Live Cloud)';
                 backendStatusIndicator.style.color = 'var(--success)';
                 if (statusDot) {
                     statusDot.className = 'status-dot online';
                 }
             } else {
-                backendStatusIndicator.textContent = 'Static Preview (Backend not running)';
+                backendStatusIndicator.textContent = 'Connecting to Cloud Backend...';
                 backendStatusIndicator.style.color = 'var(--warning)';
                 if (statusDot) {
                     statusDot.className = 'status-dot';
                 }
+                // Retry in 4 seconds if waking up
+                setTimeout(checkBackend, 4000);
             }
         } catch {
             backendStatusIndicator.textContent = 'Offline';
@@ -188,6 +191,7 @@
             if (statusDot) {
                 statusDot.className = 'status-dot offline';
             }
+            setTimeout(checkBackend, 6000);
         }
     }
 
