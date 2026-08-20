@@ -100,7 +100,8 @@
             loadProjects(),
             loadSkills(),
             loadEducation(),
-            loadMessages()
+            loadMessages(),
+            loadResumeSetting()
         ]);
         updateStats();
     }
@@ -591,8 +592,45 @@
             });
         });
 
+        // Resume Settings Form
+        const resumeForm = document.getElementById('resume-config-form');
+        const resumeInput = document.getElementById('resume-url-input');
+        const testResumeBtn = document.getElementById('test-resume-btn');
+
+        if (resumeForm) {
+            resumeForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const url = resumeInput ? resumeInput.value.trim() : '';
+                await window.api.setResumeUrl(url);
+                showToast('success', 'Online Resume link saved successfully!');
+            });
+        }
+
+        if (testResumeBtn) {
+            testResumeBtn.addEventListener('click', () => {
+                const url = resumeInput ? resumeInput.value.trim() : '';
+                if (url && url.startsWith('http')) {
+                    window.open(url, '_blank');
+                } else {
+                    showToast('error', 'Please enter a valid URL starting with http:// or https://');
+                }
+            });
+        }
+
         // Initial Auth check
         updateAuthView();
+    }
+
+    async function loadResumeSetting() {
+        const resumeInput = document.getElementById('resume-url-input');
+        if (resumeInput) {
+            const url = await window.api.getResumeUrl();
+            if (url && !url.includes('your-resume-link')) {
+                resumeInput.value = url;
+            } else {
+                resumeInput.value = '';
+            }
+        }
     }
 
     // Expose global handlers for inline table button onclicks

@@ -462,6 +462,7 @@
                 <button class="tab-btn" data-tab="skills-tab">Skills Manager</button>
                 <button class="tab-btn" data-tab="education-tab">Education Manager</button>
                 <button class="tab-btn" data-tab="messages-tab">Messages Inbox</button>
+                <button class="tab-btn" data-tab="resume-tab">Resume Link</button>
             </nav>
 
             <!-- TAB 1: PROJECTS -->
@@ -574,6 +575,31 @@
                             <!-- Populated dynamically via admin.js -->
                         </tbody>
                     </table>
+                </div>
+            </section>
+
+            <!-- TAB 5: RESUME LINK SETTINGS -->
+            <section class="tab-content" id="resume-tab">
+                <div class="tab-actions-header">
+                    <div>
+                        <h2>Online Resume &amp; Profile Link</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Set the online PDF link (Google Drive view link, GitHub raw URL, Cloudinary, Dropbox) for visitors to view/download.</p>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem; max-width: 680px;">
+                    <form id="resume-config-form">
+                        <div class="form-group" style="margin-bottom: 1.25rem;">
+                            <label for="resume-url-input" class="form-label">Online PDF URL (Google Drive / Direct Cloud PDF) *</label>
+                            <input type="url" id="resume-url-input" class="form-input" placeholder="https://drive.google.com/file/d/1YourFileId/view?usp=sharing" required>
+                            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem;">Visitors who click the "Resume" button on your portfolio will open this online PDF directly in a new tab.</p>
+                        </div>
+
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;">
+                            <button type="submit" class="btn btn-primary btn-sm" id="save-resume-btn">Save Resume Link</button>
+                            <button type="button" class="btn btn-secondary btn-sm" id="test-resume-btn">Preview Online Resume</button>
+                        </div>
+                    </form>
                 </div>
             </section>
         </div>

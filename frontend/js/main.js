@@ -87,4 +87,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
+
+    // 4. Resume Button & Dynamic Online PDF Handling
+    const resumeBtn = document.getElementById('resume-btn');
+    const resumeModal = document.getElementById('resume-modal');
+    const closeResumeBtn = document.getElementById('close-resume-modal');
+    const onlineResumeLinkBtn = document.getElementById('online-resume-link-btn');
+
+    if (resumeBtn && resumeModal) {
+        resumeBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const resumeUrl = await window.api.getResumeUrl();
+            const isValidOnlineUrl = resumeUrl && resumeUrl.startsWith('http') && !resumeUrl.includes('your-resume-link');
+
+            if (isValidOnlineUrl) {
+                // Open configured online PDF/Google Drive link directly in new tab
+                window.open(resumeUrl, '_blank');
+            } else {
+                // If not yet configured with custom cloud link, open the digital interactive resume modal
+                if (onlineResumeLinkBtn && isValidOnlineUrl) {
+                    onlineResumeLinkBtn.href = resumeUrl;
+                    onlineResumeLinkBtn.style.display = 'inline-flex';
+                }
+                resumeModal.style.display = 'flex';
+            }
+        });
+
+        if (closeResumeBtn) {
+            closeResumeBtn.addEventListener('click', () => {
+                resumeModal.style.display = 'none';
+            });
+        }
+
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                resumeModal.style.display = 'none';
+            }
+        });
+    }
 });
+

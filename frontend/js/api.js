@@ -18,7 +18,8 @@ const API_CONFIG = {
     },
     TIMEOUT_MS: 30000,
     TOKEN_KEY: 'arun_portfolio_jwt_token',
-    USER_KEY: 'arun_portfolio_admin_user'
+    USER_KEY: 'arun_portfolio_admin_user',
+    RESUME_KEY: 'arun_portfolio_resume_url'
 };
 
 // Built-in Mock Data Fallback in case Backend is starting up or offline
@@ -355,10 +356,22 @@ class ApiService {
         }
     }
 
-    async deleteContactMessage(id) {
-        return (await this._request(`/contact/${id}`, {
-            method: 'DELETE'
-        })).data;
+    // Resume URL Management
+    async getResumeUrl() {
+        const stored = localStorage.getItem(API_CONFIG.RESUME_KEY);
+        if (stored && stored.trim() !== '') {
+            return stored;
+        }
+        return 'https://drive.google.com/drive/folders/your-resume-link';
+    }
+
+    async setResumeUrl(url) {
+        if (url) {
+            localStorage.setItem(API_CONFIG.RESUME_KEY, url.trim());
+        } else {
+            localStorage.removeItem(API_CONFIG.RESUME_KEY);
+        }
+        return true;
     }
 }
 
