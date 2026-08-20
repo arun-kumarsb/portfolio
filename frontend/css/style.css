@@ -22,11 +22,14 @@
     --text-muted: #64748b;
     --text-inverse: #0a0d14;
     
-    /* Accents & Brand */
-    --accent-primary: #38bdf8;       /* Bright Cyan */
-    --accent-secondary: #3b82f6;     /* Modern Blue */
-    --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #6366f1 100%);
-    --accent-glow: rgba(56, 189, 248, 0.15);
+    /* Accents & Brand (Tactical Defense & Modern Tech) */
+    --accent-primary: #38bdf8;       /* Tactical Cyan */
+    --accent-secondary: #3b82f6;     /* Precision Blue */
+    --tactical-gold: #f59e0b;        /* Regimental Gold */
+    --tactical-olive: #10b981;       /* Army Olive / Resilience Green */
+    --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #10b981 100%);
+    --accent-glow: rgba(56, 189, 248, 0.18);
+    --tactical-glow: rgba(16, 185, 129, 0.2);
     
     /* Status Colors */
     --success: #10b981;
@@ -51,6 +54,42 @@
     /* Transitions */
     --transition-fast: 0.18s ease;
     --transition-normal: 0.28s ease;
+}
+
+/* Tactical & Military Heritage Utilities */
+.badge-tactical {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--tactical-olive);
+    border-radius: var(--radius-full);
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.badge-sikhli {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: var(--tactical-gold);
+    border-radius: var(--radius-full);
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+.card-defense-highlight {
+    background: linear-gradient(135deg, rgba(18, 25, 41, 0.9) 0%, rgba(13, 27, 24, 0.6) 100%) !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.06);
 }
 
 /* Base & Reset */
