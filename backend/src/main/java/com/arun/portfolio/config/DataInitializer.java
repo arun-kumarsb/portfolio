@@ -53,16 +53,16 @@ public class DataInitializer implements CommandLineRunner {
                             "Full-Stack Portfolio REST API Engine",
                             "A clean, production-grade backend demonstrating REST APIs, DTO request/response boundaries, Service layer, Repository layer, JPA/Hibernate persistence, and MySQL integration.",
                             "Java, Spring Boot, Spring Data JPA, Hibernate, MySQL, REST API, Jakarta Validation",
-                            "https://github.com/TODO-arun/portfolio-backend",
+                            "https://github.com/arun-kumarsb/portfolio",
                             "",
                             "",
                             true
                     ),
                     new Project(
                             "Secure Tactical Communication & Command System (STCS)",
-                            "[Academic System-Design Simulation] An academic project exploring secure distributed communication concepts, command-and-control simulation architecture, event-driven messaging, and data flow modeling.",
+                            "[Academic System Design Exploration] An academic project exploring secure distributed communication concepts, command-and-control simulation architecture, event-driven messaging, and data flow modeling.",
                             "Spring Boot, REST APIs, Distributed Systems, Event Architecture, System Design",
-                            "https://github.com/TODO-arun/stcs-simulation",
+                            "https://github.com/arun-kumarsb/portfolio",
                             "",
                             "",
                             false
@@ -105,8 +105,8 @@ public class DataInitializer implements CommandLineRunner {
                     // Core CS & Systems
                     new Skill("Data Structures & Algorithms", "Core CS", "Proficient"),
                     new Skill("Object-Oriented Design", "Core CS", "Advanced"),
-                    new Skill("Computer Networks & OS", "Core CS", "Proficient"),
-                    new Skill("System Architecture", "Core CS", "Intermediate")
+                    new Skill("Distributed Systems & Networks", "Core CS", "Intermediate"),
+                    new Skill("AI/ML & Security (Learning)", "Core CS", "Beginner")
             );
             skillRepository.saveAll(skills);
         }
@@ -116,15 +116,15 @@ public class DataInitializer implements CommandLineRunner {
         if (educationRepository.count() == 0) {
             List<Education> educationList = Arrays.asList(
                     new Education(
-                            "TODO: Engineering Institution / University",
+                            "Engineering Institution / University",
                             "Bachelor of Engineering (B.E. / B.Tech)",
                             "Computer Science & Engineering",
                             "2023",
                             "2027 (Expected)",
-                            "Core coursework in Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, and Operating Systems."
+                            "Coursework in Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, and Operating Systems."
                     ),
                     new Education(
-                            "TODO: Higher Secondary School",
+                            "Higher Secondary School",
                             "Higher Secondary Certificate (Class XII)",
                             "Science Stream (Physics, Chemistry, Mathematics, Computer Science)",
                             "2021",

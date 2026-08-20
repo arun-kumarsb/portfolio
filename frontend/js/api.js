@@ -30,7 +30,7 @@ const MOCK_DATA = {
             title: "SpendSense",
             description: "A personal and group expense tracking application featuring multi-user expense splitting, settlement tracking, category-wise expenditure analytics, and secure local data persistence.",
             technologies: "React Native, Expo, JavaScript",
-            githubUrl: "https://github.com/TODO-arun/spendsense",
+            githubUrl: "https://github.com/arun-kumarsb/portfolio",
             liveUrl: "",
             imageUrl: "",
             featured: true
@@ -38,9 +38,9 @@ const MOCK_DATA = {
         {
             id: 2,
             title: "Full-Stack Portfolio & API Engine",
-            description: "A production-grade developer portfolio powered by a Java Spring Boot monolithic REST API, Spring Security, Spring Data JPA persistence, Jakarta Validation, and MySQL relational database.",
+            description: "A developer portfolio powered by a Java Spring Boot REST API, Spring Security, Spring Data JPA persistence, Jakarta Validation, and MySQL relational database.",
             technologies: "Java, Spring Boot, Spring Security, JWT, Spring Data JPA, MySQL, REST API",
-            githubUrl: "https://github.com/TODO-arun/portfolio-backend",
+            githubUrl: "https://github.com/arun-kumarsb/portfolio",
             liveUrl: "",
             imageUrl: "",
             featured: true
@@ -48,9 +48,9 @@ const MOCK_DATA = {
         {
             id: 3,
             title: "Secure Tactical Communication & Command System (STCS)",
-            description: "[Academic System-Design Simulation] An academic architecture project exploring secure distributed communications, command-and-control concepts, event-driven messaging, and data flow modeling.",
+            description: "[Academic System Design Exploration] An academic simulation exploring the architecture of secure communication and command-oriented software, distributed systems, authentication, and event-driven messaging.",
             technologies: "Java, Spring Boot, REST APIs, Distributed Systems, Event Architecture, System Design",
-            githubUrl: "https://github.com/TODO-arun/stcs-simulation",
+            githubUrl: "https://github.com/arun-kumarsb/portfolio",
             liveUrl: "",
             imageUrl: "",
             featured: false
@@ -81,27 +81,27 @@ const MOCK_DATA = {
 
         { id: 18, name: "Data Structures & Algorithms", category: "Core CS", proficiency: "Proficient" },
         { id: 19, name: "Object-Oriented Design", category: "Core CS", proficiency: "Advanced" },
-        { id: 20, name: "Computer Networks & OS", category: "Core CS", proficiency: "Proficient" },
-        { id: 21, name: "System Architecture", category: "Core CS", proficiency: "Intermediate" }
+        { id: 20, name: "Distributed Systems & Networking", category: "Core CS", proficiency: "Intermediate" },
+        { id: 21, name: "AI/ML & Security (Learning)", category: "Core CS", proficiency: "Beginner" }
     ],
     education: [
         {
             id: 1,
-            institution: "TODO: Engineering Institution / University",
+            institution: "Engineering Institution / University",
             degree: "Bachelor of Engineering (B.E. / B.Tech)",
             field: "Computer Science & Engineering",
             startDate: "2023",
             endDate: "2027 (Expected)",
-            description: "Core coursework in Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, and Operating Systems."
+            description: "Coursework in Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, and Operating Systems."
         },
         {
             id: 2,
-            institution: "TODO: Higher Secondary School",
+            institution: "Higher Secondary School",
             degree: "Higher Secondary Certificate (Class XII)",
             field: "Science Stream (Physics, Chemistry, Mathematics, Computer Science)",
             startDate: "2021",
             endDate: "2023",
-            description: "Built strong foundations in mathematics, analytical problem solving, and introductory computing."
+            description: "Foundations in mathematics, analytical problem solving, and introductory computing."
         }
     ],
     messages: [

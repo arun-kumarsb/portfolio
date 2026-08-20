@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <meta name="description" content="Arun's Career Vision & Military Heritage: SIKH LI Lineage, Indian Armed Forces Technical Officer Aspirations, and Strategic Defense Technology Focus (DRDO, HAL, IISc Projects).">
+    <meta name="description" content="Arun's Personal Ambition: Service & Technology. Exploring military service aspirations alongside software engineering, distributed systems, AI/ML, and cybersecurity.">
     <meta name="theme-color" content="#0a0d14">
-    <title>Defense &amp; Systems Vision | Arun.dev</title>
+    <title>Defense & Service Ambition | Arun</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,116 +17,154 @@
     <link rel="stylesheet" href="css/responsive.css">
 
     <style>
-        .defense-hero {
-            padding-top: calc(var(--header-height) + 3.5rem);
-            padding-bottom: 4rem;
+        .ambition-hero {
+            padding-top: calc(var(--header-height) + 3rem);
+            padding-bottom: 3.5rem;
             position: relative;
-            background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
-                        radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.06) 0%, transparent 50%),
-                        radial-gradient(circle at 10% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+                        radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
         }
 
-        .heritage-card {
-            background: linear-gradient(135deg, rgba(20, 27, 45, 0.95) 0%, rgba(17, 30, 28, 0.85) 100%);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-            border-left: 5px solid var(--tactical-gold);
+        .ambition-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: var(--radius-full);
+            color: var(--accent-primary);
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            letter-spacing: 0.4px;
+            margin-bottom: 1.25rem;
+        }
+
+        .personal-statement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--accent-primary);
             border-radius: var(--radius-lg);
             padding: 2rem 2.25rem;
-            margin: 2.5rem 0;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.08);
+            margin: 2.25rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .heritage-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .heritage-text {
-            font-size: 1.05rem;
+        .personal-statement-card p {
+            font-size: 1.02rem;
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.75;
+            margin-bottom: 1rem;
         }
 
-        .defense-quote-banner {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            border-left: 4px solid var(--accent-primary);
-            border-radius: var(--radius-md);
-            padding: 1.75rem 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        .personal-statement-card p:last-child {
+            margin-bottom: 0;
         }
 
-        .defense-quote-text {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        .pillars-grid {
+        /* Two Paths Grid */
+        .paths-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
-        .pillar-card {
+        .path-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            padding: 1.75rem;
-            transition: all var(--transition-normal);
+            padding: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 0.85rem;
+            gap: 1rem;
+            transition: all var(--transition-normal);
+            position: relative;
         }
 
-        .pillar-card:hover {
+        .path-card:hover {
             border-color: var(--border-hover);
             transform: translateY(-3px);
-            background: var(--bg-card-hover);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
         }
 
-        .pillar-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-md);
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .path-label {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.25rem 0.65rem;
+            border-radius: var(--radius-full);
+            width: fit-content;
         }
 
-        .pillar-card h3 {
-            font-size: 1.15rem;
+        .path-label-service {
+            background: rgba(59, 130, 246, 0.12);
+            color: var(--accent-secondary);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .path-label-tech {
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent-primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .path-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .path-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        /* Why Defense Pillars */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .why-card {
+            background: rgba(15, 20, 34, 0.7);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .why-card h3 {
+            font-size: 1.1rem;
             color: var(--text-primary);
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .pillar-card p {
+        .why-card p {
             color: var(--text-secondary);
             font-size: 0.92rem;
             line-height: 1.6;
         }
 
-        .target-org-grid {
+        /* Tech Learning Grid */
+        .tech-learning-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.25rem;
-            margin-top: 1.5rem;
+            margin-top: 1.75rem;
         }
 
-        .target-org-card {
-            background: rgba(18, 25, 41, 0.8);
+        .tech-learning-card {
+            background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-md);
             padding: 1.4rem;
@@ -136,101 +174,102 @@
             transition: all var(--transition-fast);
         }
 
-        .target-org-card:hover {
-            border-color: var(--tactical-gold);
+        .tech-learning-card:hover {
+            border-color: var(--accent-primary);
             transform: translateY(-2px);
-            background: rgba(22, 32, 53, 0.9);
         }
 
-        .target-org-badge {
-            font-family: var(--font-mono);
-            font-size: 0.76rem;
-            color: var(--tactical-gold);
-            text-transform: uppercase;
+        .tech-learning-card h4 {
+            font-size: 1rem;
+            color: var(--text-primary);
             font-weight: 600;
         }
 
-        .target-org-name {
-            font-size: 1.1rem;
-            font-weight: 700;
+        .tech-learning-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* STCS Simulation Card */
+        .stcs-highlight-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 2.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .academic-notice {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px dashed var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 1rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .timeline-step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            position: relative;
+        }
+
+        .step-tag {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 1.05rem;
+            font-weight: 600;
             color: var(--text-primary);
         }
 
-        .target-org-desc {
+        .step-desc {
             font-size: 0.86rem;
             color: var(--text-secondary);
             line-height: 1.5;
         }
 
-        .pathway-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 2.25rem;
-            margin-top: 2rem;
-        }
-
-        .pathway-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.25rem;
-            margin-top: 1.5rem;
-        }
-
-        .pathway-item {
+        .cta-box {
             display: flex;
-            align-items: flex-start;
-            gap: 0.85rem;
-            padding: 1rem 1.15rem;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-        }
-
-        .pathway-bullet {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--tactical-gold);
-            margin-top: 0.5rem;
-            flex-shrink: 0;
-        }
-
-        .pathway-text {
-            font-size: 0.92rem;
-            color: var(--text-secondary);
-            line-height: 1.55;
-        }
-
-        .disclaimer-box {
-            background: rgba(30, 41, 59, 0.35);
-            border: 1px dashed rgba(245, 158, 11, 0.4);
-            border-radius: var(--radius-md);
-            padding: 1.25rem 1.5rem;
-            margin-top: 2.5rem;
-            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1rem;
-            align-items: center;
-        }
-
-        .disclaimer-text {
-            font-size: 0.84rem;
-            color: var(--text-muted);
-            line-height: 1.5;
+            margin-top: 3.5rem;
         }
 
         @media screen and (max-width: 768px) {
-            .defense-quote-text {
-                font-size: 1.1rem;
-            }
-            .defense-quote-banner {
-                padding: 1.25rem 1.25rem;
-            }
-            .heritage-card {
+            .personal-statement-card {
                 padding: 1.5rem 1.25rem;
             }
-            .pathway-box {
-                padding: 1.5rem 1.2rem;
+            .path-card {
+                padding: 1.5rem 1.25rem;
             }
         }
     </style>
@@ -254,213 +293,232 @@
             </nav>
 
             <div class="nav-actions">
-                <a href="index.html#contact" class="btn btn-primary btn-sm">
-                    <span>Connect</span>
+                <a href="index.html#projects" class="btn btn-outline btn-sm">
+                    <span>Technical Projects</span>
                 </a>
                 <a href="index.html" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 0.35rem;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"></path></svg>
-                    <span>Portfolio</span>
+                    <span>Back to Portfolio</span>
                 </a>
             </div>
         </div>
     </header>
 
     <main id="main-content">
-        <!-- Vision Hero Header -->
-        <section class="defense-hero">
+        <!-- Hero Section -->
+        <section class="ambition-hero">
             <div class="container">
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
-                    <span class="badge-sikhli">⚔ SIKH LI Lineage (30 Yrs)</span>
-                    <span class="badge-tactical">Armed Forces &amp; Defense Aspirant</span>
+                <div class="ambition-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
+                    <span>Aspiration &bull; Service &amp; Technology</span>
                 </div>
                 
-                <h1 class="hero-title" style="font-size: 2.75rem; max-width: 880px;">
-                    Engineering High-Reliability Systems for <span class="text-gradient">National Defense &amp; Security</span>
+                <h1 class="hero-title" style="font-size: 2.6rem; max-width: 840px;">
+                    Defense &amp; Service &mdash; <span class="text-gradient">A Long-Term Ambition</span>
                 </h1>
                 
-                <p class="hero-description" style="font-size: 1.15rem; max-width: 800px;">
-                    A dedicated aspiration to combine disciplined military lineage with rigorous software engineering, distributed systems, and communications architecture for India's strategic defense ecosystem.
+                <p class="hero-description" style="font-size: 1.15rem; max-width: 780px;">
+                    Inspired by service. Driven by technology. Exploring where engineering and national service could take me.
                 </p>
 
-                <!-- Army Brat Heritage Box -->
-                <div class="heritage-card">
-                    <div class="heritage-title">
-                        <span>⚔ Military Heritage &bull; Army Brat Roots</span>
-                    </div>
-                    <p class="heritage-text">
-                        I am an <strong>Army Brat</strong> whose father dedicated <strong>30 years of distinguished service to the SIKH LI (Sikh Light Infantry)</strong>. Growing up immersed in military ethos and cantonment life forged my core philosophy: <strong>discipline, integrity, mission focus, and an unwavering devotion to the nation</strong>.
+                <!-- Personal Statement -->
+                <div class="personal-statement-card">
+                    <p>
+                        My interest in defense is personal. My father's service gave me an early connection to the armed forces and shaped my respect for the idea of serving the country. As an engineering student, I have found my own path toward that interest through technology, software engineering, and systems thinking.
                     </p>
-                    <p class="heritage-text" style="margin-top: 0.75rem;">
-                        My highest personal aspiration is to serve the nation in uniform as a <strong>Technical / Engineering Officer in the Armed Forces</strong>. In parallel, my technical mission is focused on engineering robust, high-reliability software architectures for premier strategic defense organizations such as <strong>DRDO, HAL, and IISc Defense Research Projects</strong>.
+                    <p>
+                        One of my long-term goals is to explore becoming an Army Officer, including opportunities such as <strong>CDS or AFCAT</strong> if I meet the relevant eligibility requirements. I know that this is a competitive path, and I see it as an aspiration that I need to work toward rather than something I can assume will happen.
                     </p>
-                </div>
-
-                <!-- Core Statement of Purpose -->
-                <div class="defense-quote-banner">
-                    <p class="defense-quote-text">
-                        &ldquo;I want to build technology that matters &mdash; combining software engineering, distributed systems, and robust architecture with my lifelong devotion to defense and national security.&rdquo;
+                    <p>
+                        At the same time, I want to develop into a strong software engineer with knowledge of backend systems, distributed architectures, AI/ML, cybersecurity, and communication systems. Whether my future contribution comes through military service, defense technology, or another engineering role, I want the skills I build to have a meaningful purpose.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 1: Target Strategic Organizations -->
-        <section class="section" style="background: rgba(15, 23, 42, 0.4);">
+        <!-- Section 1: Two Paths I'm Exploring -->
+        <section class="section" style="background: rgba(15, 20, 34, 0.4);">
             <div class="container">
                 <div class="section-header" style="text-align: left; max-width: 800px;">
-                    <span class="section-tag">01. Strategic Focus</span>
-                    <h2 class="section-title">Target Defense Ecosystem &amp; Organizations</h2>
+                    <span class="section-tag">01. Directions</span>
+                    <h2 class="section-title">Two Paths I'm Exploring</h2>
                     <p class="section-subtitle">
-                        Aiming to contribute software engineering and distributed architecture to India's premier defense &amp; aerospace initiatives:
+                        Keeping two connected but distinct possibilities open as I continue developing academically and technically:
                     </p>
                 </div>
 
-                <div class="target-org-grid">
-                    <div class="target-org-card" style="border-left: 3px solid var(--tactical-gold);">
-                        <span class="target-org-badge">National Service</span>
-                        <h3 class="target-org-name">Indian Armed Forces</h3>
-                        <p class="target-org-desc">Technical / Engineering Officer commissioning in the Army, leading mission-critical engineering units and systems.</p>
+                <div class="paths-grid">
+                    <!-- Path 1: Armed Forces -->
+                    <div class="path-card">
+                        <span class="path-label path-label-service">Long-Term Goal</span>
+                        <h3>Army Officer Aspirations</h3>
+                        <p>
+                            Exploring the possibility of serving as an Army Officer through competitive entry routes such as CDS or AFCAT, subject to eligibility, examinations, selection, and medical requirements.
+                        </p>
                     </div>
 
-                    <div class="target-org-card" style="border-left: 3px solid var(--accent-primary);">
-                        <span class="target-org-badge">Strategic R&amp;D</span>
-                        <h3 class="target-org-name">DRDO</h3>
-                        <p class="target-org-desc">Defence Research and Development Organisation &bull; Software architectures for command-and-control, radar telemetry, and secure communications.</p>
-                    </div>
-
-                    <div class="target-org-card" style="border-left: 3px solid var(--tactical-olive);">
-                        <span class="target-org-badge">Aerospace &amp; Defense</span>
-                        <h3 class="target-org-name">HAL</h3>
-                        <p class="target-org-desc">Hindustan Aeronautics Limited &bull; High-reliability backend systems, avionics telemetry pipelines, and aerospace engineering software.</p>
-                    </div>
-
-                    <div class="target-org-card" style="border-left: 3px solid #6366f1;">
-                        <span class="target-org-badge">Advanced Research</span>
-                        <h3 class="target-org-name">IISc Defense Projects</h3>
-                        <p class="target-org-desc">Indian Institute of Science &bull; Strategic research projects in high-performance computing, distributed simulations, and aerospace dynamics.</p>
+                    <!-- Path 2: Defense Technology -->
+                    <div class="path-card">
+                        <span class="path-label path-label-tech">Engineering Direction</span>
+                        <h3>Technology for Defense</h3>
+                        <p>
+                            Building skills in software engineering, distributed systems, AI/ML, cybersecurity, and backend architecture with a long-term interest in applying technology to defense and national-security challenges.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Technical Pillars of Defense Software -->
+        <!-- Section 2: Why Defense? -->
         <section class="section">
             <div class="container">
                 <div class="section-header" style="text-align: left; max-width: 800px;">
-                    <span class="section-tag">02. Engineering Rigor</span>
-                    <h2 class="section-title">Technical Pillars of Defense Systems</h2>
+                    <span class="section-tag">02. Motivation</span>
+                    <h2 class="section-title">Why Defense?</h2>
                     <p class="section-subtitle">
-                        Defense software demands uncompromising standards of reliability, fault tolerance, and deterministic execution:
+                        Understanding what draws me toward defense from both a personal and technical perspective:
                     </p>
                 </div>
 
-                <div class="pillars-grid">
-                    <div class="pillar-card">
-                        <div class="pillar-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                <div class="why-grid">
+                    <div class="why-card">
+                        <div class="feature-icon" style="margin-bottom: 0.25rem;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                         </div>
-                        <h3>Zero-Downtime &amp; Fault Tolerance</h3>
-                        <p>Mission-critical defense software demands zero-downtime architecture, graceful failure isolation, and deterministic execution in harsh environments.</p>
+                        <h3>Personal Connection</h3>
+                        <p>
+                            My father's service gave me a personal connection to the armed forces and influenced my interest in serving the country.
+                        </p>
                     </div>
 
-                    <div class="pillar-card">
-                        <div class="pillar-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <div class="why-card">
+                        <div class="feature-icon" style="margin-bottom: 0.25rem;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                         </div>
-                        <h3>Secure Tactical Communications</h3>
-                        <p>Designing reliable communication protocols, network telemetry synchronization, and robust messaging pipelines for tactical data flows.</p>
+                        <h3>Engineering Connection</h3>
+                        <p>
+                            As an engineering student, I am naturally drawn to the technical challenges behind secure communication, reliable software, distributed systems, cybersecurity, and intelligent information systems.
+                        </p>
                     </div>
 
-                    <div class="pillar-card">
-                        <div class="pillar-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 22 7 12"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    <div class="why-card">
+                        <div class="feature-icon" style="margin-bottom: 0.25rem;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
-                        <h3>Command &amp; Control (C2) Software</h3>
-                        <p>Architecting distributed event-driven messaging, node hierarchy modeling, and operational coordination tools for structured decision support.</p>
+                        <h3>Future Possibility</h3>
+                        <p>
+                            I want to keep both service and technology open as possible directions for my future rather than deciding too early what that future must look like.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Technical Learning Areas -->
+        <section class="section" style="background: rgba(15, 20, 34, 0.4);">
+            <div class="container">
+                <div class="section-header" style="text-align: left; max-width: 800px;">
+                    <span class="section-tag">03. Technical Foundations</span>
+                    <h2 class="section-title">Areas of Technical Learning &amp; Interest</h2>
+                    <p class="section-subtitle">
+                        Core technical topics I am studying and building projects around as an engineering student:
+                    </p>
+                </div>
+
+                <div class="tech-learning-grid">
+                    <div class="tech-learning-card">
+                        <h4>Backend Engineering</h4>
+                        <p>Java, Spring Boot, REST APIs, relational databases, authentication, and secure application architecture.</p>
                     </div>
 
-                    <div class="pillar-card">
-                        <div class="pillar-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-                        </div>
-                        <h3>Distributed Systems Architecture</h3>
-                        <p>Designing scalable service boundaries, efficient data replication, error isolation, and high-performance relational database storage.</p>
+                    <div class="tech-learning-card">
+                        <h4>Distributed Systems</h4>
+                        <p>Event-driven architecture, asynchronous communication, fault tolerance, scalability, and system design.</p>
+                    </div>
+
+                    <div class="tech-learning-card">
+                        <h4>AI &amp; Machine Learning</h4>
+                        <p>Machine learning fundamentals, data modeling, anomaly detection, and intelligent decision-support concepts.</p>
+                    </div>
+
+                    <div class="tech-learning-card">
+                        <h4>Cybersecurity</h4>
+                        <p>Secure software development, authentication, authorization boundaries, and security-focused architecture.</p>
+                    </div>
+
+                    <div class="tech-learning-card">
+                        <h4>Communication Systems</h4>
+                        <p>Learning how reliable and secure communication protocols can be designed for challenging environments.</p>
                     </div>
                 </div>
 
                 <!-- Academic Simulation Highlight Card -->
-                <div style="background: var(--bg-card); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-lg); padding: 2rem; margin-top: 2rem;">
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1rem;">
+                <div class="stcs-highlight-card">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem;">
                         <div>
-                            <span class="project-tag" style="background: rgba(245, 158, 11, 0.15); color: var(--tactical-gold);">Academic System-Design Simulation</span>
-                            <h3 style="font-size: 1.35rem; color: var(--text-primary); margin-top: 0.4rem;">Secure Tactical Communication &amp; Command System (STCS)</h3>
+                            <span class="project-tag" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-primary);">Academic Project / System Design Exploration</span>
+                            <h3 style="font-size: 1.3rem; color: var(--text-primary); margin-top: 0.4rem;">Secure Tactical Communication &amp; Command System (STCS)</h3>
                         </div>
-                        <a href="index.html#projects" class="btn btn-outline btn-sm">View in Projects &rarr;</a>
+                        <a href="index.html#projects" class="btn btn-outline btn-sm">View in Portfolio &rarr;</a>
                     </div>
                     <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65;">
-                        An academic architecture simulation exploring distributed tactical communications, command-and-control concepts, event-driven messaging, telemetry propagation, and data flow modeling for mission scenarios.
+                        STCS is an academic simulation exploring the architecture of secure communication and command-oriented software. The project is intended to help me understand backend engineering, distributed systems, authentication, authorization, communication, resilience, and system design.
                     </p>
+                    <div class="academic-notice">
+                        <span>ℹ️</span>
+                        <span>Academic simulation &mdash; not connected to real military systems or operational infrastructure.</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Dual Career Pathways -->
-        <section class="section" style="background: rgba(15, 23, 42, 0.4);">
+        <!-- Section 4: Journey Timeline -->
+        <section class="section">
             <div class="container">
                 <div class="section-header" style="text-align: left; max-width: 800px;">
-                    <span class="section-tag">03. Pathways</span>
-                    <h2 class="section-title">Long-Term Service &amp; Industry Pathways</h2>
+                    <span class="section-tag">04. Timeline</span>
+                    <h2 class="section-title">Career Journey &amp; Preparation</h2>
                     <p class="section-subtitle">
-                        Committed to contributing engineering excellence through either technical officer service in uniform or civilian defense technology R&amp;D:
+                        A realistic progression from student learning to future contribution:
                     </p>
                 </div>
 
-                <div class="pathway-box">
-                    <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem;">Target Pathways of Contribution:</h3>
-                    
-                    <div class="pathway-list">
-                        <div class="pathway-item">
-                            <div class="pathway-bullet"></div>
-                            <div class="pathway-text">
-                                <strong>Technical / Engineering Officer Pathway:</strong> Pursuing engineering officer entries in the Armed Forces, combining technical mastery with military leadership, discipline, and national responsibility.
-                            </div>
-                        </div>
-
-                        <div class="pathway-item">
-                            <div class="pathway-bullet"></div>
-                            <div class="pathway-text">
-                                <strong>Strategic Defense R&amp;D (DRDO &amp; HAL):</strong> Developing high-reliability backend architectures and telemetry software for premier Indian defense organizations.
-                            </div>
-                        </div>
-
-                        <div class="pathway-item">
-                            <div class="pathway-bullet"></div>
-                            <div class="pathway-text">
-                                <strong>Tactical Command &amp; Control Software:</strong> Building resilient command-and-control software, telemetry pipelines, and distributed event architectures.
-                            </div>
-                        </div>
-
-                        <div class="pathway-item">
-                            <div class="pathway-bullet"></div>
-                            <div class="pathway-text">
-                                <strong>Advanced Academic Research (IISc):</strong> Contributing to defense and aerospace computing projects, simulation modeling, and mission-critical systems.
-                            </div>
-                        </div>
+                <div class="timeline-container">
+                    <div class="timeline-step">
+                        <span class="step-tag">Today</span>
+                        <h3 class="step-title">Engineering Student</h3>
+                        <p class="step-desc">Building foundations in software engineering, backend development, AI/ML, and systems design.</p>
                     </div>
 
-                    <!-- Honest Aspiration Disclaimer -->
-                    <div class="disclaimer-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--tactical-gold); flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                        <p class="disclaimer-text">
-                            <strong>Note on Service Aspirations:</strong> This vision articulates my personal background, family heritage, and long-term career direction. As a Computer Science &amp; Engineering student, my current focus is on building the uncompromising technical rigor and discipline needed to qualify for and contribute to these elite organizations.
-                        </p>
+                    <div class="timeline-step">
+                        <span class="step-tag">Next</span>
+                        <h3 class="step-title">Build Engineering Depth</h3>
+                        <p class="step-desc">Spring Boot &rarr; databases &rarr; security &rarr; distributed systems &rarr; AI/ML &rarr; system design.</p>
+                    </div>
+
+                    <div class="timeline-step">
+                        <span class="step-tag">Explore</span>
+                        <h3 class="step-title">Defense &amp; Service</h3>
+                        <p class="step-desc">Explore relevant defense-sector careers and officer-entry opportunities such as CDS/AFCAT based on eligibility.</p>
+                    </div>
+
+                    <div class="timeline-step">
+                        <span class="step-tag">Long Term</span>
+                        <h3 class="step-title">Contribute &amp; Grow</h3>
+                        <p class="step-desc">Potentially contribute through military service, defense technology, software engineering, AI/ML, cybersecurity, or related technical roles.</p>
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 3.5rem;">
-                    <a href="index.html#contact" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 1rem;">
-                        <span>Get in Touch / Discuss Systems Engineering</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                <!-- Call to Action -->
+                <div class="cta-box">
+                    <a href="index.html#projects" class="btn btn-primary">
+                        <span>Explore My Technical Work &rarr;</span>
+                    </a>
+                    <a href="index.html#about" class="btn btn-secondary">
+                        <span>Read My Engineering Journey &rarr;</span>
+                    </a>
+                    <a href="index.html#contact" class="btn btn-outline">
+                        <span>Get in Touch</span>
                     </a>
                 </div>
             </div>
@@ -474,16 +532,16 @@
                 <a href="index.html" class="brand-logo footer-logo">
                     <span class="logo-bracket">&lt;</span>Arun<span class="logo-accent">.dev</span><span class="logo-bracket">/&gt;</span>
                 </a>
-                <p class="footer-desc">Army Brat &bull; SIKH LI Lineage &bull; Defense Systems Aspirant</p>
+                <p class="footer-desc">Engineering Student &bull; Software Developer &bull; Service &amp; Technology Aspirant</p>
             </div>
             
             <div class="footer-tech">
-                <span>Vision: Software Engineering &bull; Distributed Systems &bull; DRDO / HAL / IISc Focus</span>
+                <span>Aspiration: Service &bull; Software Engineering &bull; Systems Design</span>
             </div>
 
             <div class="footer-right">
                 <p>&copy; <span id="current-year">2026</span> Arun. All rights reserved.</p>
-                <a href="index.html" style="font-size: 0.78rem; color: var(--tactical-gold); display: inline-block; margin-top: 0.25rem;">&larr; Back to Portfolio</a>
+                <a href="index.html" style="font-size: 0.78rem; color: var(--accent-primary); display: inline-block; margin-top: 0.25rem;">&larr; Back to Portfolio</a>
             </div>
         </div>
     </footer>

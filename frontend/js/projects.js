@@ -47,7 +47,7 @@
             const isFeatured = Boolean(proj.featured);
             const isSTCS = (proj.title || '').toLowerCase().includes('tactical') || 
                            (proj.title || '').toLowerCase().includes('stcs');
-            const githubUrl = proj.githubUrl || 'https://github.com/TODO-arun';
+            const githubUrl = proj.githubUrl || 'https://github.com/arun-kumarsb';
             const liveUrl = proj.liveUrl;
 
             return `
