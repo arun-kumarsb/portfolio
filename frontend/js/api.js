@@ -49,7 +49,7 @@ const MOCK_DATA = {
             id: 3,
             title: "Secure Tactical Communication & Command System (STCS)",
             description: "[Academic System-Design Simulation] An academic architecture project exploring secure distributed communications, command-and-control concepts, event-driven messaging, and data flow modeling.",
-            technologies: "Java, Spring Boot, REST APIs, Distributed Systems, Event Architecture, AI/ML",
+            technologies: "Java, Spring Boot, REST APIs, Distributed Systems, Event Architecture, System Design",
             githubUrl: "https://github.com/TODO-arun/stcs-simulation",
             liveUrl: "",
             imageUrl: "",
@@ -79,10 +79,10 @@ const MOCK_DATA = {
         { id: 16, name: "VS Code", category: "Tools", proficiency: "Proficient" },
         { id: 17, name: "IntelliJ IDEA", category: "Tools", proficiency: "Proficient" },
 
-        { id: 18, name: "Machine Learning", category: "AI/ML", proficiency: "Intermediate" },
-        { id: 19, name: "Deep Learning", category: "AI/ML", proficiency: "Intermediate" },
-        { id: 20, name: "Neural Networks", category: "AI/ML", proficiency: "Intermediate" },
-        { id: 21, name: "Python ML Ecosystem", category: "AI/ML", proficiency: "Intermediate" }
+        { id: 18, name: "Data Structures & Algorithms", category: "Core CS", proficiency: "Proficient" },
+        { id: 19, name: "Object-Oriented Design", category: "Core CS", proficiency: "Advanced" },
+        { id: 20, name: "Computer Networks & OS", category: "Core CS", proficiency: "Proficient" },
+        { id: 21, name: "System Architecture", category: "Core CS", proficiency: "Intermediate" }
     ],
     education: [
         {
@@ -92,7 +92,7 @@ const MOCK_DATA = {
             field: "Computer Science & Engineering",
             startDate: "2023",
             endDate: "2027 (Expected)",
-            description: "Core coursework in Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, Operating Systems, and AI/ML foundations."
+            description: "Core coursework in Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, and Operating Systems."
         },
         {
             id: 2,

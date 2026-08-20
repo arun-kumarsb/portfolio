@@ -61,7 +61,7 @@ public class DataInitializer implements CommandLineRunner {
                     new Project(
                             "Secure Tactical Communication & Command System (STCS)",
                             "[Academic System-Design Simulation] An academic project exploring secure distributed communication concepts, command-and-control simulation architecture, event-driven messaging, and data flow modeling.",
-                            "Spring Boot, REST APIs, Distributed Systems, Event Architecture, AI/ML",
+                            "Spring Boot, REST APIs, Distributed Systems, Event Architecture, System Design",
                             "https://github.com/TODO-arun/stcs-simulation",
                             "",
                             "",
@@ -102,11 +102,11 @@ public class DataInitializer implements CommandLineRunner {
                     new Skill("VS Code", "Tools", "Proficient"),
                     new Skill("IntelliJ IDEA", "Tools", "Proficient"),
 
-                    // AI/ML
-                    new Skill("Machine Learning", "AI/ML", "Intermediate"),
-                    new Skill("Deep Learning", "AI/ML", "Intermediate"),
-                    new Skill("Neural Networks", "AI/ML", "Intermediate"),
-                    new Skill("Python ML Ecosystem", "AI/ML", "Intermediate")
+                    // Core CS & Systems
+                    new Skill("Data Structures & Algorithms", "Core CS", "Proficient"),
+                    new Skill("Object-Oriented Design", "Core CS", "Advanced"),
+                    new Skill("Computer Networks & OS", "Core CS", "Proficient"),
+                    new Skill("System Architecture", "Core CS", "Intermediate")
             );
             skillRepository.saveAll(skills);
         }
@@ -121,7 +121,7 @@ public class DataInitializer implements CommandLineRunner {
                             "Computer Science & Engineering",
                             "2023",
                             "2027 (Expected)",
-                            "Core coursework in Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, Operating Systems, and AI/ML foundations."
+                            "Core coursework in Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, and Operating Systems."
                     ),
                     new Education(
                             "TODO: Higher Secondary School",
