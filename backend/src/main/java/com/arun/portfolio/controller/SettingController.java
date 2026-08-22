@@ -25,6 +25,22 @@ public class SettingController {
     }
 
     /**
+     * Public endpoint to fetch all settings or resume URL.
+     */
+    @GetMapping
+    public ResponseEntity<Map<String, String>> getAllSettings() {
+        Map<String, String> response = new HashMap<>();
+        settingRepository.findAll().forEach(s -> response.put(s.getSettingKey(), s.getSettingValue()));
+        if (!response.containsKey("resumeUrl")) {
+            String resumeUrl = settingRepository.findBySettingKey("resume_url")
+                    .map(Setting::getSettingValue)
+                    .orElse("");
+            response.put("resumeUrl", resumeUrl);
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    /**
      * Public endpoint to fetch the current configured resume URL.
      */
     @GetMapping("/resume")
