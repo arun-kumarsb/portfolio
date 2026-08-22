@@ -356,13 +356,46 @@ class ApiService {
         }
     }
 
-    // Resume URL Management
+    // =========================================================================
+    // Dynamic Resume Link Management (Cloud Database + Local Fallback)
+    // =========================================================================
     async getResumeUrl() {
+        try {
+            const res = await this._request('/settings/resume');
+            if (res && res.data && res.data.resumeUrl && res.data.resumeUrl.trim() !== '') {
+                localStorage.setItem(API_CONFIG.RESUME_KEY, res.data.resumeUrl.trim());
+                return res.data.resumeUrl.trim();
+            }
+        } catch (err) {
+            console.debug("[API] Fallback to local resume storage:", err);
+        }
+
         const stored = localStorage.getItem(API_CONFIG.RESUME_KEY);
         if (stored && stored.trim() !== '') {
-            return stored;
+            return stored.trim();
         }
         return 'https://drive.google.com/drive/folders/your-resume-link';
+    }
+
+    async setResumeUrl(url) {
+        const cleanUrl = url ? url.trim() : '';
+        if (cleanUrl) {
+            localStorage.setItem(API_CONFIG.RESUME_KEY, cleanUrl);
+        } else {
+            localStorage.removeItem(API_CONFIG.RESUME_KEY);
+        }
+
+        if (this.isAuthenticated()) {
+            try {
+                await this._request('/settings/resume', {
+                    method: 'POST',
+                    body: JSON.stringify({ value: cleanUrl })
+                });
+            } catch (err) {
+                console.warn("[API] Failed to persist resume setting to backend, stored in local storage:", err);
+            }
+        }
+        return true;
     }
 
     // =========================================================================

@@ -600,15 +600,36 @@
         if (resumeForm) {
             resumeForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const url = resumeInput ? resumeInput.value.trim() : '';
-                await window.api.setResumeUrl(url);
-                showToast('success', 'Online Resume link saved successfully!');
+                let url = resumeInput ? resumeInput.value.trim() : '';
+                if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+                    url = 'https://' + url;
+                    if (resumeInput) resumeInput.value = url;
+                }
+                const saveBtn = document.getElementById('save-resume-btn');
+                if (saveBtn) {
+                    saveBtn.disabled = true;
+                    saveBtn.textContent = 'Saving...';
+                }
+                try {
+                    await window.api.setResumeUrl(url);
+                    showToast('success', 'Online Resume link saved successfully to database!');
+                } catch (err) {
+                    showToast('error', err.message || 'Failed to save resume link.');
+                } finally {
+                    if (saveBtn) {
+                        saveBtn.disabled = false;
+                        saveBtn.textContent = 'Save Resume Link';
+                    }
+                }
             });
         }
 
         if (testResumeBtn) {
             testResumeBtn.addEventListener('click', () => {
-                const url = resumeInput ? resumeInput.value.trim() : '';
+                let url = resumeInput ? resumeInput.value.trim() : '';
+                if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+                    url = 'https://' + url;
+                }
                 if (url && url.startsWith('http')) {
                     window.open(url, '_blank');
                 } else {
