@@ -95,22 +95,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const onlineResumeLinkBtn = document.getElementById('online-resume-link-btn');
 
     if (resumeBtn && resumeModal) {
-        resumeBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const resumeUrl = await window.api.getResumeUrl();
-            const isValidOnlineUrl = resumeUrl && resumeUrl.startsWith('http') && !resumeUrl.includes('your-resume-link');
-
-            if (isValidOnlineUrl) {
-                // Open configured online PDF/Google Drive link directly in new tab
-                window.open(resumeUrl, '_blank');
-            } else {
-                // If not yet configured with custom cloud link, open the digital interactive resume modal
-                if (onlineResumeLinkBtn && isValidOnlineUrl) {
-                    onlineResumeLinkBtn.href = resumeUrl;
+        // Pre-fetch configured resume URL on page load
+        window.api.getResumeUrl().then(url => {
+            if (url && url.startsWith('http') && !url.includes('your-resume-link')) {
+                if (onlineResumeLinkBtn) {
+                    onlineResumeLinkBtn.href = url;
                     onlineResumeLinkBtn.style.display = 'inline-flex';
                 }
-                resumeModal.style.display = 'flex';
             }
+        }).catch(() => {});
+
+        resumeBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            // Refresh resume URL for the direct cloud PDF link
+            try {
+                const resumeUrl = await window.api.getResumeUrl();
+                const isValidOnlineUrl = resumeUrl && resumeUrl.startsWith('http') && !resumeUrl.includes('your-resume-link');
+                if (onlineResumeLinkBtn) {
+                    if (isValidOnlineUrl) {
+                        onlineResumeLinkBtn.href = resumeUrl;
+                        onlineResumeLinkBtn.style.display = 'inline-flex';
+                    } else {
+                        onlineResumeLinkBtn.style.display = 'none';
+                    }
+                }
+            } catch (err) {
+                // Ignore network errors and show modal
+            }
+
+            // Always display the digital resume modal
+            resumeModal.style.display = 'flex';
         });
 
         if (closeResumeBtn) {

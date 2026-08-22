@@ -625,15 +625,20 @@
         }
 
         if (testResumeBtn) {
-            testResumeBtn.addEventListener('click', () => {
+            testResumeBtn.addEventListener('click', async () => {
                 let url = resumeInput ? resumeInput.value.trim() : '';
+                if (!url) {
+                    try {
+                        url = await window.api.getResumeUrl();
+                    } catch (e) {}
+                }
                 if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
                     url = 'https://' + url;
                 }
-                if (url && url.startsWith('http')) {
+                if (url && url.startsWith('http') && !url.includes('your-resume-link')) {
                     window.open(url, '_blank');
                 } else {
-                    showToast('error', 'Please enter a valid URL starting with http:// or https://');
+                    showToast('error', 'Please enter or save a valid URL (starting with https://) first.');
                 }
             });
         }
