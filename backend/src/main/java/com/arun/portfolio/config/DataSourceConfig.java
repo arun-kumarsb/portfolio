@@ -44,6 +44,13 @@ public class DataSourceConfig {
         String targetUser = configuredUsername;
         String targetPass = configuredPassword;
 
+        // If URL has user:pass embedded in jdbc: format, normalize for parsing
+        if (targetUrl.startsWith("jdbc:postgresql://") && targetUrl.contains("@")) {
+            targetUrl = targetUrl.substring(5);
+        } else if (targetUrl.startsWith("jdbc:mysql://") && targetUrl.contains("@")) {
+            targetUrl = targetUrl.substring(5);
+        }
+
         // Automatically convert raw cloud URIs (e.g. Render/Supabase postgres://user:pass@host:port/db) to JDBC format
         if (targetUrl.startsWith("postgres://") || targetUrl.startsWith("postgresql://")) {
             try {
@@ -57,7 +64,8 @@ public class DataSourceConfig {
                 }
                 String host = uri.getHost();
                 int port = uri.getPort() != -1 ? uri.getPort() : 5432;
-                String path = uri.getPath() != null && !uri.getPath().isEmpty() ? uri.getPath() : "/portfolio_db_mvyr";
+                String path = (uri.getPath() != null && !uri.getPath().isEmpty() && !uri.getPath().equals("/")) ? uri.getPath() : "/portfolio_db_mvyr";
+                if (!path.startsWith("/")) path = "/" + path;
                 targetUrl = "jdbc:postgresql://" + host + ":" + port + path;
                 if (!targetUrl.contains("sslmode") && host != null && !host.contains("localhost") && !host.contains("127.0.0.1") && !host.equals("dpg-da4ls5on74is73e0rsvg-a")) {
                     targetUrl += "?sslmode=require";
