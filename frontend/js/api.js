@@ -365,15 +365,35 @@ class ApiService {
         return 'https://drive.google.com/drive/folders/your-resume-link';
     }
 
-    async setResumeUrl(url) {
-        if (url) {
-            localStorage.setItem(API_CONFIG.RESUME_KEY, url.trim());
-        } else {
-            localStorage.removeItem(API_CONFIG.RESUME_KEY);
-        }
-        return true;
+    // =========================================================================
+    // Keep-Alive Ping Service (Heartbeat every 40 seconds)
+    // Prevents Render Free Tier instances from sleeping
+    // =========================================================================
+    startKeepAlive(intervalMs = 40000) {
+        if (this._keepAliveTimer) return;
+
+        const ping = async () => {
+            try {
+                const target = `${API_CONFIG.BASE_URL}/projects`;
+                await fetch(target, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' },
+                    cache: 'no-store'
+                });
+                console.debug(`[Keep-Alive] 40s heartbeat ping sent to ${target}`);
+            } catch (err) {
+                // Silently ignore background ping errors
+            }
+        };
+
+        // Immediate ping on boot to warm up backend
+        ping();
+
+        // Repeat every 40 seconds
+        this._keepAliveTimer = setInterval(ping, intervalMs);
     }
 }
 
-// Export singleton API instance
+// Export singleton API instance & auto-start 40-second heartbeat
 window.api = new ApiService();
+window.api.startKeepAlive(40000);
